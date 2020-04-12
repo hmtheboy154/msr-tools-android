@@ -69,7 +69,7 @@ void wrmsr_on_all_cpus(uint32_t reg, int valcnt, char *regvals[])
 	struct dirent **namelist;
 	int dir_entries;
 
-	dir_entries = scandir("/dev/cpu", &namelist, dir_filter, 0);
+	dir_entries = scandir("/dev", &namelist, dir_filter, 0);
 	while (dir_entries--) {
 		wrmsr_on_cpu(reg, atoi(namelist[dir_entries]->d_name),
 				valcnt, regvals);
@@ -139,7 +139,7 @@ void wrmsr_on_cpu(uint32_t reg, int cpu, int valcnt, char *regvals[])
 	int fd;
 	char msr_file_name[64];
 
-	sprintf(msr_file_name, "/dev/cpu/%d/msr", cpu);
+	sprintf(msr_file_name, "/dev/msr%d", cpu);
 	fd = open(msr_file_name, O_WRONLY);
 	if (fd < 0) {
 		if (errno == ENXIO) {

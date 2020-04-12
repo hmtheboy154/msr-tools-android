@@ -41,7 +41,7 @@ static int cpuid(int cpu, uint32_t leaf, uint32_t subleaf, struct cpuid *data)
 		char devstr[64];
 		if (fd >= 0)
 			close(fd);
-		snprintf(devstr, sizeof devstr, "/dev/cpu/%d/cpuid", cpu);
+		snprintf(devstr, sizeof devstr, "/dev/cpu%d", cpu);
 		fd = open(devstr, O_RDONLY);
 		if (fd < 0) {
 			if (errno == ENXIO) {
