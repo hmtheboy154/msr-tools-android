@@ -214,7 +214,7 @@ void rdmsr_on_cpu(uint32_t reg, int cpu)
 	char msr_file_name[64];
 	unsigned int bits;
 
-	sprintf(msr_file_name, "/dev/cpu/msr%d", cpu);
+	sprintf(msr_file_name, "/dev/msr%d", cpu);
 	fd = open(msr_file_name, O_RDONLY);
 	if (fd < 0) {
 		if (errno == ENXIO) {
